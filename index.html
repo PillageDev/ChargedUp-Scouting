@@ -1,26 +1,117 @@
 <!DOCTYPE html>
-<script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-</script>
 <html>
-    <head>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="style.css">
-        <title>FRC Scouting Webapp</title>
-    </head>
-    <body onLoad="drawShape()">
-        <div class="font-family">
-            <h1 id="heading">FRC Scouting Webapp</h1>
-            <div id="display">
-                <div id="map">
-             <canvas id="mapBackground" width="100%" height="100%">
-                    <img id="map" src="https://cdn.discordapp.com/attachments/1061391170678296736/1066107954765512815/2160pDark.png"></img>
-                </canvas>
-             </div>
-            </div>
-            <script src="script.js"></script>
-        </div>
-    </body>
-</html>
 
+<head>
+
+	<link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <h1>FRC Scouting</h1>
+    <title>FRC Scouting</title>
+    <button onclick="redAlliance()">Red Alliance</button>
+    <button onclick="blueAlliance()">Blue Alliance</button>
+    
+    
+</head>
+
+
+<body>
+    <div id="hidden">
+	<img src="https://cdn.discordapp.com/attachments/1061391170678296736/1066428315436589168/2160pDark_auto_x2_colored-removebg.png" id="mapImage" width="1304" height="640" style="text-align: center;" />
+	</div>
+	<br><br>
+    
+	<canvas id="canvas" width=1304; height=640;>Your browser is incompatible with HTML canvas</canvas>
+    <h2 id="coords">
+   
+
+    </h2>
+    <script>
+        var team = "redAlliance";
+         function redAlliance() {
+             team = "redAlliance";
+             document.getElementById("allianceDisplay").innerHTML = "Alliance: " + team;
+         }
+         function blueAlliance() {
+             team = "blueAlliance";
+             document.getElementById("allianceDisplay").innerHTML = "Alliance: " + team;
+         }
+        var x,y;
+        var rect;
+        window.onload = function() {
+
+        
+         function getMousePosition(canvas, event) {
+            x = Math.round(event.clientX - rect.left);
+        y = Math.round(event.clientY - rect.top) ;
+        rect = canvas.getBoundingClientRect();
+             
+             
+             
+             document.getElementById("coords").innerHTML = "Coords: (" + x + ", " + y + ")";
+ 
+         }
+       
+         
+     function placeCircle() {
+         var canvas = document.getElementById("canvas");
+         var ctx = canvas.getContext("2d");
+         ctx.beginPath();
+         ctx.arc(x, y, 5, 0, 2 * Math.PI);
+
+  
+        }
+       
+     }
+       
+         canvasElem = document.querySelector("canvas");
+
+         canvasElem.addEventListener("mousedown", function(e) {
+     
+         getMousePosition(canvasElem, e);
+         placeCircle();
+     });
+           
+         canvasElem.addEventListener("mousemove", function(e)
+         {
+             getMousePosition(canvasElem, e);
+           //  document.getElementById("Alliance").innerHTML = "Alliance: " + team;
+         });
+ 
+     
+     
+    
+     </script>
+<script>
+ 
+   /* function getMousePosition(canvas, event) {
+            let rect = canvas.getBoundingClientRect();
+            x = event.clientX - rect.left;
+            y = event.clientY - rect.top - 0.125;
+            alert("(" + x + ", " + y + ")");
+        }
+      
+        canvasElem = document.querySelector("canvas");
+          
+        canvasElem.addEventListener("mousedown", function(e)
+        {
+            getMousePosition(canvasElem, e);
+        });
+        */
+    var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var map = document.getElementById("mapImage");
+//draw field, 2px = 1 in. also fillRect(x, y, w, h)
+function drawField() {
+  ctx.drawImage(map, 0, 0, canvas.width, canvas.height);
+}
+drawField();
+map.classList.remove("hidden");
+
+</script>
+<h2 id="allianceDisplay">test</h2>
+<script>
+
+</script>
+<script>
+    document.getElementById("heading").innerHTML = "Coords: (" + x + ", " + y + ")";
+ </script>
