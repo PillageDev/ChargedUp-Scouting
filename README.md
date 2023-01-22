@@ -4,7 +4,7 @@
 
 ### Features:
 
-:tada: Coordinates at the mouse curser
+:tada: Coordinates at the mouse cursor
 
 🔧 Alliance switching
 
